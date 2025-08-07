@@ -1,0 +1,10 @@
+json-server --watch db.json --port 3000
+
+Para construir (build):
+-------------------------------------
+ng build --configuration=staging
+
+Para servir (serve):
+-------------------------------
+ng serve --configuration=staging
+

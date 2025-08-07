@@ -1,0 +1,30 @@
+{
+    "users": [
+        {
+            "id": "526a",
+            "email": "kendra123@gmail.com",
+            "password": "1234567",
+            "firstName": "Kendra",
+            "lastName": "Contreras",
+            "token": "my_token_for_kendra"
+        },
+        {
+            "id": "526a",
+            "email": "emma123@gmail.com",
+            "password": "1234567",
+            "firstName": "emma",
+            "lastName": "Contreras",
+            "token": "my_token_for_emma"
+        }
+    ],
+    "login": [
+        {
+            "id": "kendra123@gmail.com",
+            "token": "my_token_for_kendra"
+        },
+        {
+            "id": "emma123@gmail.com",
+            "token": "my_token_for_emma"
+        }
+    ]
+}
