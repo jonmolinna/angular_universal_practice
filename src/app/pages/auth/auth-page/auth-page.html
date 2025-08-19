@@ -8,34 +8,23 @@
       class="space-y-6"
     >
       <h5 class="text-xl font-medium text-gray-900">Iniciar sesión</h5>
-      <div>
-        <label for="email" class="block mb-2 text-sm font-medium text-gray-900"
-          >Email</label
-        >
-        <input
+        <app-custom-input 
+          label="Email"
           type="email"
-          name="email"
+          placeholder="Ingrese Correo Electronico"
           id="email"
           formControlName="email"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm placeholder:text-gray-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          placeholder="Ingrese Correo Electronico"
+          [error]="getFieldErrorMessage('email')"
         />
-      </div>
-      <div>
-        <label
-          for="password"
-          class="block mb-2 text-sm font-medium text-gray-900"
-          >Contraseña</label
-        >
-        <input
-          type="password"
-          name="password"
-          id="password"
-          formControlName="password"
-          placeholder="Contraseña"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        />
-      </div>
+     <app-custom-input 
+        label="Contraseña"
+        type="password"
+        placeholder="Contraseña"
+        id="password"
+        formControlName="password"
+        [error]="getFieldErrorMessage('password')"
+      />
+
       <div>
         <button
           type="submit"
