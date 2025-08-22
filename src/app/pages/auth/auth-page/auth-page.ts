@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthDto } from '../models/auth.dto';
 import { AuthStore } from '../../../store/auth.store';
@@ -11,9 +11,15 @@ import { getFieldError } from '../../../core/components/custom-input/form-error.
   imports: [CommonModule, ReactiveFormsModule, CustomInput],
   templateUrl: './auth-page.html',
 })
-export class AuthPage {
+export class AuthPage implements OnInit {
   private formBuilder = inject(FormBuilder);
   readonly productStore = inject(AuthStore);
+  private platformId = inject(PLATFORM_ID);
+
+
+  ngOnInit(): void {
+    console.log('Platform ID:', this.platformId);
+  }
 
   initialForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],

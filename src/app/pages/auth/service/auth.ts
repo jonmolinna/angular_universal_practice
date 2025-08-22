@@ -5,7 +5,7 @@ import { AuthDto } from '../models/auth.dto';
 import { Observable } from 'rxjs';
 
 interface LoginResponse {
-  token: string;
+  access_token: string;
 }
 
 @Injectable({
@@ -16,10 +16,6 @@ export class Auth {
   private http = inject(HttpClient);
 
   login(dto: AuthDto): Observable<LoginResponse> {
-    return this.http.get<LoginResponse>(`${this.apiUrl}/${dto.email}`);
-    // return this.http.post<LoginResponse>(`${this.apiUrl}/login`, dto);
-  }
-
-
-  
+    return this.http.post<LoginResponse>(this.apiUrl, dto);
+  } 
 }

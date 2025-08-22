@@ -1,5 +1,4 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { User } from '../core/models/user.model';
 import { Auth } from '../pages/auth/service/auth';
 import { inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -9,17 +8,17 @@ import { tapResponse } from '@ngrx/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export interface AuthState {
-  user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  error: string | null;
+  message: string | null;
   token: string | null;
+  error: string | null;
 }
 
 const initialState: AuthState = {
-  user: null,
   isAuthenticated: false,
   isLoading: false,
+  message: null,
   error: null,
   token: null,
 };
@@ -30,22 +29,24 @@ export const AuthStore = signalStore(
   withMethods((store, authService = inject(Auth)) => ({
     authentication: rxMethod<AuthDto>(
       pipe(
-        tap(() => patchState(store, { isLoading: true, error: null })),
+        tap(() => patchState(store, { isLoading: true, isAuthenticated: false, message: null, error: null })),
         switchMap((dto) => {
           return authService.login(dto).pipe(
             tapResponse({
               next: (response) => {
-                console.log('AQUI LOGIN SUCCESS: ', response);
                 patchState(store, {
-                  token: response.token,
                   isAuthenticated: true,
+                  message: 'Login successful',
+                  isLoading: false,
+                  error: null
                 });
               },
               error: (error: HttpErrorResponse) => {
-                console.log('AQUI LOGIN ERROR: ', error);
                 patchState(store, {
+                  isLoading: false,
                   error: error.message,
                   isAuthenticated: false,
+                  message: null
                 });
               },
               finalize: () => patchState(store, { isLoading: false }),
